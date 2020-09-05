@@ -5,7 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name = "users")
 public class User {
 
     @Id
@@ -21,8 +21,6 @@ public class User {
     @NotNull
     private String password;
 
-    @OneToMany
-    private Set<Posts> posts;
 
     public User() {
     }

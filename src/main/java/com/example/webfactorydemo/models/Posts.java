@@ -3,11 +3,7 @@ package com.example.webfactorydemo.models;
 import com.sun.istack.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -26,14 +22,25 @@ public class Posts {
     @CreatedDate
     private Date createdAt;
 
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Posts() {
     }
 
-    public Posts(String title, String description, Date createdAt) {
-
+    public Posts(String title, String description, Date createdAt, User user) {
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
+        this.user = user;
     }
 
     public Long getId() {
