@@ -1,9 +1,11 @@
 package com.example.webfactorydemo.models;
 
-import com.sun.istack.NotNull;
+
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity(name = "users")
 public class User {
@@ -12,13 +14,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Full Name is mandatory")
     private String fullName;
 
-    @NotNull
+    @Column(unique = true)
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email is not valid")
     private String email;
 
-    @NotNull
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 6)
     private String password;
 
 
