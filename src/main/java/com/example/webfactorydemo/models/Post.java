@@ -1,22 +1,25 @@
 package com.example.webfactorydemo.models;
 
-import com.sun.istack.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Posts {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
-    @NotNull
+    @NotBlank(message = "Title is mandatory")
+    @Size(min = 6, max = 60)
     private String title;
 
-    @NotNull
+    @NotBlank
+    @Size(min = 10, max = 255)
     private String description;
 
     @CreatedDate
@@ -33,10 +36,10 @@ public class Posts {
         this.user = user;
     }
 
-    public Posts() {
+    public Post() {
     }
 
-    public Posts(String title, String description, Date createdAt, User user) {
+    public Post(String title, String description, Date createdAt, User user) {
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;

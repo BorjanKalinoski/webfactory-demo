@@ -14,9 +14,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Full Name is mandatory")
-    private String fullName;
-
     @Column(unique = true)
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email is not valid")
@@ -26,32 +23,24 @@ public class User {
     @Size(min = 6)
     private String password;
 
+    @NotBlank(message = "Full Name is mandatory")
+    private String fullName;
 
     public User() {
     }
 
-    public User(String fullName, String email, String password) {
-
-        this.fullName = fullName;
+    public User(String email, String password, String fullName) {
         this.email = email;
         this.password = password;
+        this.fullName = fullName;
     }
 
     public Long getId() {
-
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -68,5 +57,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }
