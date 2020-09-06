@@ -1,7 +1,6 @@
 package com.example.webfactorydemo.exceptions;
 
 import com.example.webfactorydemo.models.ErrorResponseDto;
-import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CustomGlobalExceptionHandler {
 
-    @ExceptionHandler(value = {UserDoesNotExistException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDto handleException(UserDoesNotExistException e) {
+    @ExceptionHandler(value = {UserNotFoundException.class, PostNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponseDto handleException(NotFoundException e) {
         return new ErrorResponseDto(e.getMessage());
     }
 

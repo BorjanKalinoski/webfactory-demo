@@ -1,6 +1,8 @@
 package com.example.webfactorydemo.controllers;
 
 
+import com.example.webfactorydemo.models.GetPost;
+import com.example.webfactorydemo.models.GetUser;
 import com.example.webfactorydemo.models.Post;
 import com.example.webfactorydemo.models.SubmitPost;
 import com.example.webfactorydemo.services.PostService;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -28,12 +31,12 @@ public class PostController {
     }
 
     @GetMapping(value = "/{id}")
-    public Post getPost(@PathVariable("id") String id) throws Exception {
+    public GetPost getPost(@PathVariable("id") String id) throws Exception {
         return postService.getPost(id);
     }
 
     @PostMapping
-    public Post submitPost(@Valid @RequestBody SubmitPost post) throws Exception {
+    public GetPost submitPost(@Valid @RequestBody SubmitPost post) throws Exception {
         return postService.submitPost(post);
     }
 

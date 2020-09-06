@@ -38,8 +38,7 @@ public class Post {
         this.user = user;
     }
 
-    public Post() {
-    }
+    public Post() {}
 
     public Post(String title, String description, Date createdAt, User user) {
         this.title = title;

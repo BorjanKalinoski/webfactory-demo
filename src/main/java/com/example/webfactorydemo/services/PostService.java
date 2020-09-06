@@ -1,8 +1,9 @@
 package com.example.webfactorydemo.services;
 
-import com.example.webfactorydemo.models.Post;
-import com.example.webfactorydemo.models.SubmitPost;
-import com.example.webfactorydemo.models.User;
+import com.example.webfactorydemo.exceptions.ErrorKey;
+import com.example.webfactorydemo.exceptions.PostNotFoundException;
+import com.example.webfactorydemo.exceptions.UserNotFoundException;
+import com.example.webfactorydemo.models.*;
 import com.example.webfactorydemo.repositories.PostRepository;
 import com.example.webfactorydemo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,35 +26,36 @@ public class PostService {
     }
 
     public List<Post> getPosts(Pageable pageable) {//TODO pageable
-        Iterable<Post> a = postRepository.findAll(pageable);
-        return (List<Post>) a;
+        return postRepository.findAll(pageable).toList();
     }
 
-    public Post getPost(String id) throws Exception {
+    public GetPost getPost(String id) throws Exception {
         Optional<Post> post = postRepository.findById(Long.valueOf(id));
         if (post.isPresent()) {
-            return post.get();
+            Post p = post.get();
+            return new GetPost(p.getId(), p.getTitle(), p.getDescription(), p.getCreatedAt(), p.getUser().getId());
         }
-        throw new Exception("WAAW");
+
+        throw new PostNotFoundException(ErrorKey.PostNotFound);
     }
 
-    public Post submitPost(SubmitPost post) throws Exception {
+    public GetPost submitPost(SubmitPost post) throws Exception {
         Optional<User> u = userRepository.findById(post.getUserId());
         if (u.isEmpty()) {
-            throw new Exception("WTF");
+            throw new UserNotFoundException(ErrorKey.UserNotFound);
         }
         Post newPost = new Post(post.getTitle(), post.getDescription(), new Date(), u.get());
-        //TODO getpost or use the same SubmitPost class for retrieving posts, NEXT->
-        return postRepository.save(newPost);
+        postRepository.save(newPost);
+        return new GetPost(newPost.getId(), newPost.getTitle(), newPost.getDescription(), newPost.getCreatedAt(), newPost.getUser().getId());
     }
 
     public Post deletePost(String id) throws Exception {
-        Long lId = Long.valueOf(id);
-        Optional<Post> post = postRepository.findById(lId);
+        Long pId = Long.valueOf(id);
+        Optional<Post> post = postRepository.findById(pId);
         if (post.isEmpty()) {
-            throw new Exception("Post not found");
+            throw new PostNotFoundException(ErrorKey.PostNotFound);
         }
-        postRepository.deleteById(lId);
+        postRepository.deleteById(pId);
         return post.get();
     }
 

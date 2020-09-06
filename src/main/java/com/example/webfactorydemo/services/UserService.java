@@ -2,7 +2,7 @@ package com.example.webfactorydemo.services;
 
 import com.example.webfactorydemo.exceptions.ErrorKey;
 import com.example.webfactorydemo.exceptions.InvalidCredentialsException;
-import com.example.webfactorydemo.exceptions.UserDoesNotExistException;
+import com.example.webfactorydemo.exceptions.UserNotFoundException;
 import com.example.webfactorydemo.models.GetUser;
 import com.example.webfactorydemo.models.LoginUser;
 import com.example.webfactorydemo.models.User;
@@ -42,6 +42,6 @@ public class UserService {
             }
             throw new InvalidCredentialsException(ErrorKey.InvalidCredentials);
         }
-        throw new UserDoesNotExistException(ErrorKey.UserDoesNotExist);
+        throw new UserNotFoundException(ErrorKey.UserNotFound);
     }
 }

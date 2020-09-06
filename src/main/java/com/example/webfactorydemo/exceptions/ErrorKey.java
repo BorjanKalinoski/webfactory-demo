@@ -2,9 +2,11 @@ package com.example.webfactorydemo.exceptions;
 
 public enum ErrorKey {
     InvalidCredentials("Invalid credentials"),
-    UserDoesNotExist("User does not exist"),
+    UserNotFound("User not found"),
     UserAlreadyExists("User already exists"),
-    BadRequest("Invalid input")
+    BadRequest("Invalid input"),
+    PostNotFound("Post not found"),
+
     ;
 
     ErrorKey(String message) {
