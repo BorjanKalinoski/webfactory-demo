@@ -22,13 +22,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public GetUser registerUser(User user) {
+    public GetUser registerUser(User user) {//throws Exception
         User registeredUser = userRepository.save(new User(
                 user.getEmail(),
                 passwordEncoder.encode(user.getPassword()),
                 user.getFullName()
         ));
-
         return new GetUser(registeredUser.getId(), registeredUser.getFullName(), registeredUser.getEmail());
     }
 
