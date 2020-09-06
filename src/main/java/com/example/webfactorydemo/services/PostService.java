@@ -56,14 +56,15 @@ public class PostService {
         return new GetPost(newPost.getId(), newPost.getTitle(), newPost.getDescription(), new Date(), newPost.getUser().getId());
     }
 
-    public Post deletePost(String id) throws Exception {
+    public GetPost deletePost(String id) throws Exception {
         Long pId = Long.valueOf(id);
         Optional<Post> post = postRepository.findById(pId);
         if (post.isEmpty()) {
             throw new PostNotFoundException(ErrorKey.PostNotFound);
         }
         postRepository.deleteById(pId);
-        return post.get();
+        Post p = post.get();
+        return new GetPost(p.getId(), p.getTitle(), p.getDescription(), p.getCreatedAt(), p.getUser().getId());
     }
 
 }
