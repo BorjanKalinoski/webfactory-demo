@@ -26,7 +26,7 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> getPosts(Pageable pageable) {
+    public List<GetPost> getPosts(Pageable pageable) {
         return postService.getPosts(pageable);
     }
 

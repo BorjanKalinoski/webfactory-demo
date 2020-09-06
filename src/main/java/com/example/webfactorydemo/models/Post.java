@@ -43,7 +43,7 @@ public class Post {
     public Post(String title, String description, Date createdAt, User user) {
         this.title = title;
         this.description = description;
-        this.createdAt = new Date();
+        this.createdAt = createdAt;
         this.user = user;
     }
 
@@ -77,6 +77,6 @@ public class Post {
     }
 
     public void setCreatedAt(Date createdAt) {
-        this.createdAt = new Date();
+        this.createdAt = createdAt;
     }
 }

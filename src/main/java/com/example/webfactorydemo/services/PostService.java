@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -25,18 +26,24 @@ public class PostService {
         this.userRepository = userRepository;
     }
 
-    public List<Post> getPosts(Pageable pageable) {//TODO pageable
-        return postRepository.findAll(pageable).toList();
+    public List<GetPost> getPosts(Pageable pageable) {//TODO pageable
+        List<Post> posts = postRepository.findAll(pageable).toList();
+        List<GetPost> getPosts = new ArrayList<>();
+        posts.forEach(post -> {
+            getPosts.add(new GetPost(post.getId(), post.getTitle(), post.getDescription(), post.getCreatedAt(), post.getUser().getId()));
+        });
+        return getPosts;
     }
 
     public GetPost getPost(String id) throws Exception {
         Optional<Post> post = postRepository.findById(Long.valueOf(id));
-        if (post.isPresent()) {
-            Post p = post.get();
-            return new GetPost(p.getId(), p.getTitle(), p.getDescription(), p.getCreatedAt(), p.getUser().getId());
+
+        if (post.isEmpty()) {
+            throw new PostNotFoundException(ErrorKey.PostNotFound);
         }
 
-        throw new PostNotFoundException(ErrorKey.PostNotFound);
+        Post p = post.get();
+        return new GetPost(p.getId(), p.getTitle(), p.getDescription(), p.getCreatedAt(), p.getUser().getId());
     }
 
     public GetPost submitPost(SubmitPost post) throws Exception {
@@ -46,7 +53,7 @@ public class PostService {
         }
         Post newPost = new Post(post.getTitle(), post.getDescription(), new Date(), u.get());
         postRepository.save(newPost);
-        return new GetPost(newPost.getId(), newPost.getTitle(), newPost.getDescription(), newPost.getCreatedAt(), newPost.getUser().getId());
+        return new GetPost(newPost.getId(), newPost.getTitle(), newPost.getDescription(), new Date(), newPost.getUser().getId());
     }
 
     public Post deletePost(String id) throws Exception {

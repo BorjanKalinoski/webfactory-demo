@@ -35,13 +35,15 @@ public class UserService {
 
     public GetUser loginUser(LoginUser user) throws Exception {
         Optional<User> u = userRepository.findByEmail(user.getEmail());
-        if (u.isPresent()) {
-            User usr = u.get();
-            if (passwordEncoder.matches(user.getPassword(), u.get().getPassword())) {
-                return new GetUser(usr.getId(), usr.getFullName(), usr.getEmail());
-            }
+        if (u.isEmpty()) {
+            throw new UserNotFoundException(ErrorKey.UserNotFound);
+        }
+        User usr = u.get();
+        if (!passwordEncoder.matches(user.getPassword(), usr.getPassword())) {
             throw new InvalidCredentialsException(ErrorKey.InvalidCredentials);
         }
-        throw new UserNotFoundException(ErrorKey.UserNotFound);
+        return new GetUser(usr.getId(), usr.getFullName(), usr.getEmail());
     }
 }
+
+
