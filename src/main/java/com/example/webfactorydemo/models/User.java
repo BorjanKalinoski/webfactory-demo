@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity(name = "users")
 public class User {
@@ -26,6 +27,9 @@ public class User {
     @NotBlank(message = "Full Name is mandatory")
     private String fullName;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Post> posts;
+
     public User() {
     }
 
@@ -33,6 +37,13 @@ public class User {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
+    }
+
+    public User(String email, String password, String fullName, Set<Post> posts) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.posts = posts;
     }
 
     public Long getId() {
@@ -65,5 +76,13 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

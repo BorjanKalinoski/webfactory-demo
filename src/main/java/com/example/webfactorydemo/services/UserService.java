@@ -1,5 +1,8 @@
 package com.example.webfactorydemo.services;
 
+import com.example.webfactorydemo.exceptions.ErrorKey;
+import com.example.webfactorydemo.exceptions.InvalidCredentialsException;
+import com.example.webfactorydemo.exceptions.UserDoesNotExistException;
 import com.example.webfactorydemo.models.GetUser;
 import com.example.webfactorydemo.models.LoginUser;
 import com.example.webfactorydemo.models.User;
@@ -7,7 +10,6 @@ import com.example.webfactorydemo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -31,12 +33,15 @@ public class UserService {
         return new GetUser(registeredUser.getId(), registeredUser.getFullName(), registeredUser.getEmail());
     }
 
-    public GetUser loginUser(LoginUser user) {
+    public GetUser loginUser(LoginUser user) throws Exception {
         Optional<User> u = userRepository.findByEmail(user.getEmail());
         if (u.isPresent()) {
             User usr = u.get();
-            return new GetUser(usr.getId(), usr.getFullName(), usr.getEmail());
-        }//throw exception
-        return null;
+            if (passwordEncoder.matches(user.getPassword(), u.get().getPassword())) {
+                return new GetUser(usr.getId(), usr.getFullName(), usr.getEmail());
+            }
+            throw new InvalidCredentialsException(ErrorKey.InvalidCredentials);
+        }
+        throw new UserDoesNotExistException(ErrorKey.UserDoesNotExist);
     }
 }

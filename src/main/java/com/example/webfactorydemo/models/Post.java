@@ -1,5 +1,6 @@
 package com.example.webfactorydemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -25,7 +26,8 @@ public class Post {
     @CreatedDate
     private Date createdAt;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public User getUser() {
@@ -42,7 +44,7 @@ public class Post {
     public Post(String title, String description, Date createdAt, User user) {
         this.title = title;
         this.description = description;
-        this.createdAt = createdAt;
+        this.createdAt = new Date();
         this.user = user;
     }
 
@@ -76,6 +78,6 @@ public class Post {
     }
 
     public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = new Date();
     }
 }

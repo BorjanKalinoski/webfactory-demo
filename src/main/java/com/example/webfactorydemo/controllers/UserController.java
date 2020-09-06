@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public GetUser loginUser(@RequestBody @Valid LoginUser user) {
+    public GetUser loginUser(@RequestBody @Valid LoginUser user) throws Exception {
         return userService.loginUser(user);
     }
 }

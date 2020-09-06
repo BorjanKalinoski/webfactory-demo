@@ -2,27 +2,46 @@ package com.example.webfactorydemo.controllers;
 
 
 import com.example.webfactorydemo.models.Post;
+import com.example.webfactorydemo.models.SubmitPost;
 import com.example.webfactorydemo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@RestController(value = "/api/posts")
+@RestController
+@RequestMapping("/api/posts")
 public class PostController {
 
-    final
-    PostService postService;
+    private final PostService postService;
 
     @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
 
-    void submitPost(@Valid Post post) {
-
-        postService.submitPost(post);
-
+    @GetMapping
+    public List<Post> getPosts(Pageable pageable) {
+        return postService.getPosts(pageable);
     }
+
+    @GetMapping(value = "/{id}")
+    public Post getPost(@PathVariable("id") String id) throws Exception {
+        return postService.getPost(id);
+    }
+
+    @PostMapping
+    public Post submitPost(@Valid @RequestBody SubmitPost post) throws Exception {
+        return postService.submitPost(post);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public Post deletePost(@PathVariable("id") String id) throws Exception {
+        return postService.deletePost(id);
+    }
+
+    //get posts by user id
 
 }
