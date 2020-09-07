@@ -17,7 +17,18 @@
   align-self: center;
   min-height: 40px;
   margin: 1% 0;
-
+}
+.button-container{
+  width: 35%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
 }
 @media (max-width: 768px) {
   .register-form {
@@ -26,4 +37,18 @@
   .register-form mat-form-field{
     padding: 0 7.5%;
   }
+  .button-container{
+    width: 40%;
+
+  }
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  width: 80%;
 }

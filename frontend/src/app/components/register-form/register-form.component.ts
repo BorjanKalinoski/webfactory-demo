@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validator, Validators} from '@angular/forms';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
+
 export class RegisterFormComponent implements OnInit {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -14,22 +16,30 @@ export class RegisterFormComponent implements OnInit {
   });
   loading = false;
   success = false;
+  failed = false;
+  errorMessage = '';
 
-  constructor() {}
+  constructor(private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
   }
 
   // tslint:disable-next-line:typedef
-  submitHandler() {
+  async submitHandler() {
     this.loading = true;
+    console.log(this.loading);
     const formValue = this.form.value;
-
+    console.log(formValue);
     try {
+      const data = await this.userService.register(formValue);
+      console.log(data);
       this.success = true;
-    }catch (err) {
-      console.log(err);
+    }catch ({error}) {
       this.success = false;
+      this.failed = true;
+      this.errorMessage = error.error;
     }
     this.loading = false;
   }
@@ -38,7 +48,6 @@ export class RegisterFormComponent implements OnInit {
     return this.form.get('email');
   }
 
-  // tslint:disable-next-line:typedef
   get fullName() {
     return this.form.get('fullName');
   }

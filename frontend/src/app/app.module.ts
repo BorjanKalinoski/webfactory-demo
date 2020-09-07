@@ -10,7 +10,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormField} from '@angular/material/form-field';
 import {MatRippleModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
-
+import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,12 +19,14 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatInputModule,
     MatRippleModule,
     MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -32,7 +35,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatRippleModule,
     MatButtonModule,
-    MatFormField
+    MatFormField,
+    MatProgressSpinnerModule
   ]
 })
 export class AppModule {}

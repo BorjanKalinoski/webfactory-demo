@@ -1,9 +1,8 @@
 package com.example.webfactorydemo.controllers;
 
 
+import com.example.webfactorydemo.exceptions.UserNotFoundException;
 import com.example.webfactorydemo.models.GetPost;
-import com.example.webfactorydemo.models.GetUser;
-import com.example.webfactorydemo.models.Post;
 import com.example.webfactorydemo.models.SubmitPost;
 import com.example.webfactorydemo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
@@ -31,8 +30,13 @@ public class PostController {
     }
 
     @GetMapping(value = "/{id}")
-    public GetPost getPost(@PathVariable("id") String id) throws Exception {
+    public GetPost getPostById(@PathVariable("id") String id) throws Exception {
         return postService.getPost(id);
+    }
+
+    @GetMapping(value = "/user/{userId}")
+    public List<GetPost> getPostsByUserId(@PathVariable("userId") String userId,Pageable pageable) throws UserNotFoundException {
+        return postService.getPostsByUserId(userId, pageable);
     }
 
     @PostMapping
@@ -41,10 +45,8 @@ public class PostController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public GetPost deletePost(@PathVariable("id") String id) throws Exception {
+    public GetPost deletePostById(@PathVariable("id") String id) throws Exception {
         return postService.deletePost(id);
     }
-
-    //get posts by user id
 
 }

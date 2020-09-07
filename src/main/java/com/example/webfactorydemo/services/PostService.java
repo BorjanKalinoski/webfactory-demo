@@ -67,4 +67,17 @@ public class PostService {
         return new GetPost(p.getId(), p.getTitle(), p.getDescription(), p.getCreatedAt(), p.getUser().getId());
     }
 
+    public List<GetPost> getPostsByUserId(String userId, Pageable pageable) throws UserNotFoundException {
+        Long uId = Long.valueOf(userId);
+        Optional<User> u = userRepository.findById(uId);
+        if (u.isEmpty()) {
+            throw new UserNotFoundException(ErrorKey.UserNotFound);
+        }
+        List<Post> posts = postRepository.findAllByUserId(uId, pageable).toList();
+        List<GetPost> getPosts = new ArrayList<>();
+        posts.forEach(post -> {
+            getPosts.add(new GetPost(post.getId(), post.getTitle(), post.getDescription(), post.getCreatedAt(), post.getUser().getId()));
+        });
+        return getPosts;
+    }
 }
