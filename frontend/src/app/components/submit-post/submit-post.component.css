@@ -1,0 +1,16 @@
+:host {
+  width: 60%;
+}
+.submit-post-container {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+}
+.button-container {
+  justify-content: flex-end;
+}
+.submit-post-container .button-container button{
+  display: flex;
+  justify-content: center;
+}
+

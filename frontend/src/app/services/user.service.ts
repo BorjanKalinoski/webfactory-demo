@@ -8,6 +8,7 @@ import {environment} from '../environments/environment';
 })
 export class UserService {
 
+  public user: User;
   constructor(private http: HttpClient) {
 
   }
@@ -17,6 +18,9 @@ export class UserService {
   }
 
   login(data: User): Promise<User> {
-    return this.http.post<User>(`${environment.apiUrl}/users/login`, data).toPromise();
+    // @ts-ignore
+    return this.http.post<User>(`${environment.apiUrl}/users/login`, data).toPromise().then((user) => {
+      this.user = user;
+    });
   }
 }

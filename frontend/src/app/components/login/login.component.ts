@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validator, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   failed = false;
   errorMessage = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
+
 
   }
 
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
     const formValue = this.form.value;
     try {
       const data = await this.userService.login(formValue);
+      await this.router.navigate(['/']);
       this.success = true;
     }catch ({error}) {
       this.success = false;

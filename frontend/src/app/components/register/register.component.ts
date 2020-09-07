@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   failed = false;
   errorMessage = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
 
   }
 
@@ -33,6 +34,7 @@ export class RegisterComponent implements OnInit {
     try {
       const data = await this.userService.register(formValue);
       this.success = true;
+      await this.router.navigate(['/login']);
     }catch ({error}) {
       this.success = false;
       this.failed = true;

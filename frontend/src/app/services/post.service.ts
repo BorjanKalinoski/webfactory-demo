@@ -8,6 +8,7 @@ import {environment} from '../environments/environment';
 })
 export class PostService {
 
+  posts: Post[];
   constructor(private http: HttpClient) {}
 
 

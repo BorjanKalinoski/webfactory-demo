@@ -12,12 +12,18 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoginComponent} from './components/login/login.component';
-import {RegisterComponent} from './components/register-form/register.component';
+import {RegisterComponent} from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { SubmitPostComponent } from './components/submit-post/submit-post.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    SubmitPostComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule,
