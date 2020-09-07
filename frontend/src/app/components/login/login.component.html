@@ -13,7 +13,7 @@
           </div>
 
     <div [className]="'button-container'">
-      <button [ngClass]="loading ? 'spinner' : ''"  mat-raised-button type="submit" [disabled]="!form.valid">
+      <button   mat-raised-button type="submit" [disabled]="!form.valid">
         <span *ngIf="!loading">Login</span>
         <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
       </button>
