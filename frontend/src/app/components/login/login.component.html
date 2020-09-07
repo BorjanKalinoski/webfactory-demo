@@ -1,9 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submitHandler()" >
-  <div [className]="'register-form'">
-    <mat-form-field>
-      <input type="text" matInput formControlName="fullName" placeholder="Full Name">
-      <mat-error *ngIf="fullName.invalid && fullName.touched">Full name is not valid</mat-error>
-    </mat-form-field>
+  <div [className]="'form-container'">
     <mat-form-field>
       <input type="email" matInput formControlName="email" placeholder="Email">
       <mat-error *ngIf="email.invalid && email.touched">Email is not valid</mat-error>
@@ -13,15 +9,16 @@
       <mat-error *ngIf="password.invalid && password.touched">Password is not valid</mat-error>
     </mat-form-field>
     <div *ngIf="failed" [className]="'alert-danger'">
-      {{errorMessage}}
-    </div>
+      {{errorMessage ? errorMessage :"Unexpected error"}}
+          </div>
 
     <div [className]="'button-container'">
-      <button [ngClass]="loading ? 'button' : ''"  mat-raised-button type="submit" [disabled]="!form.valid">
-        <span *ngIf="!loading">Register</span>
+      <button [ngClass]="loading ? 'spinner' : ''"  mat-raised-button type="submit" [disabled]="!form.valid">
+        <span *ngIf="!loading">Login</span>
         <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
       </button>
-      or <a href="#"> Login</a>
+      <span>or</span>
+      <a routerLink="/register"> Register</a>
     </div>
 
   </div>

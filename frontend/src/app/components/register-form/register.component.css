@@ -1,4 +1,4 @@
-.register-form {
+.form-container {
   display: flex;
   flex-direction: column;
   margin: 5% auto auto;
@@ -9,20 +9,23 @@
   background-color: white;
   align-items: center;
 }
-.register-form mat-form-field {
+.form-container mat-form-field {
   width: 75%;
   margin: 1.5% 0;
 }
-.register-form button {
+.form-container button {
   align-self: center;
   min-height: 40px;
   margin: 1% 0;
 }
 .button-container{
-  width: 35%;
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+}
+.button-container *{
+  margin: 0 3%;
 }
 .button{
   display: flex;
@@ -31,15 +34,14 @@
   width: 40%;
 }
 @media (max-width: 768px) {
-  .register-form {
+  .form-container {
     width: 90%;
   }
-  .register-form mat-form-field{
+  .form-container mat-form-field{
     padding: 0 7.5%;
   }
   .button-container{
-    width: 40%;
-
+    flex-direction: column;
   }
 }
 .alert-danger {

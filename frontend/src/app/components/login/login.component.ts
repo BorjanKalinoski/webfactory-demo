@@ -3,16 +3,14 @@ import {FormControl, FormGroup, Validator, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-
-export class RegisterFormComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    fullName: new FormControl('', Validators.required)
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
   loading = false;
   success = false;
@@ -29,12 +27,9 @@ export class RegisterFormComponent implements OnInit {
   // tslint:disable-next-line:typedef
   async submitHandler() {
     this.loading = true;
-    console.log(this.loading);
     const formValue = this.form.value;
-    console.log(formValue);
     try {
-      const data = await this.userService.register(formValue);
-      console.log(data);
+      const data = await this.userService.login(formValue);
       this.success = true;
     }catch ({error}) {
       this.success = false;
@@ -46,10 +41,6 @@ export class RegisterFormComponent implements OnInit {
 
   get email() {
     return this.form.get('email');
-  }
-
-  get fullName() {
-    return this.form.get('fullName');
   }
 
   get password() {

@@ -4,18 +4,20 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {RegisterFormComponent} from './components/register-form/register-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormField} from '@angular/material/form-field';
 import {MatRippleModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register-form/register.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterFormComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
