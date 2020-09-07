@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="submitHandler()" [hidden]="success" >
+  <div [className]="'register-form'">
+    <mat-form-field>
+      <input type="text" matInput formControlName="fullName" placeholder="Full Name">
+      <mat-error *ngIf="fullName.invalid && fullName.touched">Full name is not valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="email" matInput formControlName="email" placeholder="Email">
+      <mat-error *ngIf="email.invalid && email.touched">Email is not valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput formControlName="password" placeholder="Password">
+      <mat-error *ngIf="password.invalid && password.touched">Password is not valid</mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="!form.valid">Register</button>
+  </div>
+</form>
+
+<div *ngIf="success">
+  yay
+</div>
