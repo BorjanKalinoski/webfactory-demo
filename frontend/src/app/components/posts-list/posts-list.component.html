@@ -1,4 +1,5 @@
 <div [className]="'posts-container'">
+  <div *ngIf="posts.length===0">There are no posts to show..</div>
   <div *ngFor="let post of posts">
     <app-post [id]="post.id" [title]="post.title" [description]="post.description" [createdAt]="post.createdAt" [userId]="post.userId"></app-post>
   </div>
