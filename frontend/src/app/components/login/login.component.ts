@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validator, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
@@ -37,13 +37,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.userService.login(formValue).subscribe(user => {
         this.userService.user = user;
+        this.loading = false;
         this.router.navigate(['/']);
       }, ({error}) => {
         this.failed = true;
         this.errorMessage = error.error;
+        this.loading = false;
       })
     );
-    this.loading = false;
   }
 
 

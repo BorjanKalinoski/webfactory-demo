@@ -31,10 +31,15 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.postService.newPostSubject.subscribe(post => {
-        this.posts = [...this.posts, post];
+        this.posts = [post, ...this.posts, ];
       }, (err) => {
         this.failed = true;
         this.error = err.error.error;
+      })
+    );
+    this.subscriptions.add(
+      this.postService.deletePostSubject.subscribe(data => {
+        this.posts = this.posts.filter(post => post.id !== data.id);
       })
     );
   }

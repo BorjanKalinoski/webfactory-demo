@@ -1,5 +1,5 @@
 :host {
-  width: 60%;
+  width: 80%;
 }
 .submit-post-container {
   display: flex;
@@ -13,4 +13,8 @@
   display: flex;
   justify-content: center;
 }
-
+@media (max-width: 768px) {
+  :host{
+    width: 100%;
+  }
+}

@@ -37,14 +37,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const formValue = this.form.value;
     this.subscriptions.add(
       this.userService.register(formValue).subscribe(data => {
+        this.loading = false;
         this.router.navigate(['/login']);
       }, ({error}) => {
         this.failed = true;
         this.errorMessage = error.error;
+        this.loading = false;
       })
     );
 
-    this.loading = false;
   }
 
   get email() {

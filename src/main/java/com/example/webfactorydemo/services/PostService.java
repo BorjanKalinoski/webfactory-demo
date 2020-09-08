@@ -7,6 +7,7 @@ import com.example.webfactorydemo.models.*;
 import com.example.webfactorydemo.repositories.PostRepository;
 import com.example.webfactorydemo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,13 @@ public class PostService {
     }
 
     public List<GetPost> getPosts(Pageable pageable) {//TODO pageable
-        List<Post> posts = postRepository.findAll(pageable).toList();
+        Page<Post> posts = postRepository.findAllByOrderByCreatedAtDesc(pageable);
         List<GetPost> getPosts = new ArrayList<>();
+
         posts.forEach(post -> {
             getPosts.add(new GetPost(post.getId(), post.getTitle(), post.getDescription(), post.getCreatedAt(), post.getUser().getId()));
         });
+
         return getPosts;
     }
 

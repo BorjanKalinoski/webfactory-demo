@@ -6,6 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
-    Page<Post> findAll(Pageable pageable);
     Page<Post> findAllByUserId(Long user_id, Pageable pageable);
+    Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
 }

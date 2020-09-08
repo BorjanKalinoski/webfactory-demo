@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
+import {UserService} from '../../services/user.service';
+import {PostService} from '../../services/post.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -7,17 +10,37 @@ import * as moment from 'moment';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  @Input() id;
   @Input() title;
   @Input() description;
   @Input() createdAt;
+  @Input() userId;
+  private subscriptions: Subscription = new Subscription();
 
 
-  constructor() { }
+  constructor(private userService: UserService, private postService: PostService) {
+
+  }
 
   ngOnInit(): void {
   }
 
   getFormat(date) {
-    return moment(date).format('DD-MM-YYYY');
+    return moment(date).format('DD-MM-YYYY hh:mm A');
+  }
+
+  renderX() {
+    if (!this.userService.user) {
+      return false;
+    }
+    return this.userService.user.id === this.userId;
+  }
+
+  deletePost() {
+    this.subscriptions.add(
+      this.postService.deletePostById(this.id).subscribe(data => {
+        this.postService.deletePostSubject.next(data);
+      })
+    );
   }
 }

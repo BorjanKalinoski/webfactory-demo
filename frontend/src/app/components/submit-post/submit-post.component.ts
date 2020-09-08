@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validator, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {PostService} from '../../services/post.service';
-import {Subject, Subscription} from 'rxjs';
-import {Post} from '../../models/Post';
+import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Component({
@@ -32,20 +31,21 @@ export class SubmitPostComponent implements OnInit, OnDestroy {
     this.failed = false;
     const formValue = this.form.value;
     if (!this.userService.user) {
-      console.log('is it here?');
       await this.router.navigate(['/login']);
     }
+
     formValue.userId = this.userService.user.id;
     this.subscriptions.add(
       this.postService.submitPost(formValue).subscribe(post => {
+        this.loading = false;
         this.postService.newPostSubject.next(post);
       }, ({error}) => {
         this.failed = true;
+        this.loading = false;
         this.errorMessage = error.error; // Hah
       })
     );
 
-    this.loading = false;
   }
 
   get title() {

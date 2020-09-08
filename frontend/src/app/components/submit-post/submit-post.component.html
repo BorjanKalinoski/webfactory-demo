@@ -4,8 +4,8 @@
       <input type="text" matInput formControlName="title" placeholder="Title">
       <mat-error *ngIf="title.invalid && title.touched">Title is not valid</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <textarea outlined rows="4" matInput formControlName="description" placeholder="Description">sss</textarea>
+    <mat-form-field appearance="outline">
+      <textarea  rows="4" matInput formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="description.invalid && description.touched">Description is not valid</mat-error>
     </mat-form-field>
     <div *ngIf="failed" [className]="'alert-danger'">
