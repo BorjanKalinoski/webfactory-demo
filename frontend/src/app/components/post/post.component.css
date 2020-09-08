@@ -7,6 +7,8 @@
   flex-direction: column;
   background-color: aliceblue;
   text-overflow: ellipsis;
+  position: relative;
+
 }
 .post-container * {
   margin: 0;
@@ -20,4 +22,16 @@
 
 .post-container h4{
   padding: 0;
+}
+
+.post-container span {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 1%;
+  color: red;
+  background: transparent;
+  font-weight: bolder;
+  right: 0;
+  cursor: pointer;
 }

@@ -1,4 +1,13 @@
 <div [className]="'container'">
-  <app-submit-post></app-submit-post>
+  <div *ngIf="!isLoggedIn()">
+    <a routerLink="/register"> Register</a>
+    <br/>
+    <br/>
+    <a routerLink="/login">Login</a>
+    <br/>
+    <br/>
+  </div>
+
+  <app-submit-post *ngIf="isLoggedIn()"></app-submit-post>
   <app-posts-list></app-posts-list>
 </div>

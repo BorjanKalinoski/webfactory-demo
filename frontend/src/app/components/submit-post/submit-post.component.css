@@ -1,5 +1,6 @@
 :host {
-  width: 80%;
+  width: 100%;
+
 }
 .submit-post-container {
   display: flex;
@@ -12,6 +13,9 @@
 .submit-post-container .button-container button{
   display: flex;
   justify-content: center;
+}
+ form{
+  padding: 1% 3%;
 }
 @media (max-width: 768px) {
   :host{

@@ -19,4 +19,8 @@ export class HomeComponent implements OnInit {
     // }
   }
 
+  isLoggedIn() {
+    return this.userService.user !== undefined;
+  }
+
 }
