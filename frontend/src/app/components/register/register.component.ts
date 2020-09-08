@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -21,9 +21,11 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   subscriptions: Subscription = new Subscription();
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
-  }
 
   ngOnInit(): void {
   }
@@ -43,8 +45,6 @@ export class RegisterComponent implements OnInit {
     );
 
     this.loading = false;
-
-
   }
 
   get email() {
@@ -57,5 +57,9 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.form.get('password');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
