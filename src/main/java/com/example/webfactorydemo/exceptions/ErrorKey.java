@@ -4,7 +4,7 @@ public enum ErrorKey {
     InvalidCredentials("Invalid credentials"),
     UserNotFound("User not found"),
     UserAlreadyExists("User already exists"),
-    BadRequest("Invalid input"),
+    BadRequest("Bad request"),
     PostNotFound("Post not found"),
 
     ;

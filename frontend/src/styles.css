@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #ccc;
+  font-size: 112% !important;
 }
 .container {
   display: flex;
@@ -38,28 +42,32 @@ body {
   min-height: 40px;
   margin: 1% 0;
 }
-.button-container{
+.button-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.button-container *{
+.button-container * {
   margin: 0 3%;
+  font-size: 100%;
 }
-.button{
+.loading {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.button-container button {
+  padding: 1.5% 2.5%;
 }
 @media (max-width: 768px) {
   .form-container {
     width: 90%;
   }
-  .form-container mat-form-field{
+  .form-container mat-form-field {
     padding: 0 7.5%;
   }
-  .button-container{
+  .button-container {
     flex-direction: column;
   }
 }
@@ -67,10 +75,10 @@ body {
   color: #721c24;
   background-color: #f8d7da;
   position: relative;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   width: 80%;
 }
 .form-container .button-container .mat-raised-button {
@@ -80,10 +88,20 @@ body {
 }
 
 @media (max-width: 768px) {
-  .container  {
+  .container {
     width: 90% !important;
+    padding: 5% 0.5%;
   }
-  .container mat-form-field{
+  .container mat-form-field {
     padding: 0 7.5%;
+  }
+
+  .button-container * {
+    margin: 2% auto;
+    font-size: 105%;
+  }
+  .button-container button {
+    width: 30%;
+    padding: 1.5% 2.5%;
   }
 }

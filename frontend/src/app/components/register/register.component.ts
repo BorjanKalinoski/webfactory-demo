@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +17,9 @@ export class RegisterComponent implements OnInit {
     fullName: new FormControl('', Validators.required)
   });
   loading = false;
-  success = false;
   failed = false;
   errorMessage = '';
+  subscriptions: Subscription = new Subscription();
 
   constructor(private userService: UserService, private router: Router) {
 
@@ -27,20 +28,23 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // tslint:disable-next-line:typedef
-  async submitHandler() {
+  submitHandler() {
     this.loading = true;
+    this.failed = false;
+
     const formValue = this.form.value;
-    try {
-      const data = await this.userService.register(formValue);
-      this.success = true;
-      await this.router.navigate(['/login']);
-    }catch ({error}) {
-      this.success = false;
-      this.failed = true;
-      this.errorMessage = error.error;
-    }
+    this.subscriptions.add(
+      this.userService.register(formValue).subscribe(data => {
+        this.router.navigate(['/login']);
+      }, ({error}) => {
+        this.failed = true;
+        this.errorMessage = error.error;
+      })
+    );
+
     this.loading = false;
+
+
   }
 
   get email() {

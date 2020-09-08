@@ -16,11 +16,11 @@ public class Post {
 
     @Column(unique = true)
     @NotBlank(message = "Title is mandatory")
-    @Size(min = 6, max = 60)
+    @Size(min = 6)
     private String title;
 
     @NotBlank
-    @Size(min = 10, max = 255)
+    @Size(min = 6, max = 255)
     private String description;
 
     @CreatedDate
