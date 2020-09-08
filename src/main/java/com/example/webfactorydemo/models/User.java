@@ -1,12 +1,10 @@
 package com.example.webfactorydemo.models;
 
-
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "users")
 public class User {
@@ -28,7 +26,7 @@ public class User {
     private String fullName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Post> posts;
+    private List<Post> posts;
 
     public User() {
     }
@@ -39,7 +37,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    public User(String email, String password, String fullName, Set<Post> posts) {
+    public User(String email, String password, String fullName, List<Post> posts) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -78,11 +76,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Set<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Set<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 }

@@ -1,16 +1,12 @@
 package com.example.webfactorydemo.controllers;
 
-
 import com.example.webfactorydemo.exceptions.UserNotFoundException;
 import com.example.webfactorydemo.models.GetPost;
-import com.example.webfactorydemo.models.Post;
 import com.example.webfactorydemo.models.SubmitPost;
 import com.example.webfactorydemo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -37,7 +33,7 @@ public class PostController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    public List<GetPost> getPostsByUserId(@PathVariable("userId") String userId,Pageable pageable) throws UserNotFoundException {
+    public List<GetPost> getPostsByUserId(@PathVariable("userId") String userId, Pageable pageable) throws UserNotFoundException {
         return postService.getPostsByUserId(userId, pageable);
     }
 

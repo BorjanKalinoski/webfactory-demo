@@ -22,6 +22,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(
       this.postService.getPosts().subscribe(posts => {
+        console.log('poists!');
+        console.log(posts);
         this.posts = posts;
       }, (err) => {
         this.failed = true;
