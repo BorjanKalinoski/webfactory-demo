@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {PostService} from '../../services/post.service';
 import {Subject, Subscription} from 'rxjs';
 import {Post} from '../../models/Post';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-submit-post',
@@ -22,14 +23,18 @@ export class SubmitPostComponent implements OnInit, OnDestroy {
     description: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private postService: PostService, private userService: UserService) { }
+  constructor(private postService: PostService, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  submitHandler() {
+  async submitHandler() {
     this.loading = true;
     this.failed = false;
     const formValue = this.form.value;
+    if (!this.userService.user) {
+      console.log('is it here?');
+      await this.router.navigate(['/login']);
+    }
     formValue.userId = this.userService.user.id;
     this.subscriptions.add(
       this.postService.submitPost(formValue).subscribe(post => {

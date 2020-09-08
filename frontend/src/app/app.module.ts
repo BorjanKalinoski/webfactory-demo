@@ -17,6 +17,7 @@ import { SubmitPostComponent } from './components/submit-post/submit-post.compon
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { ErrorComponent } from './components/error/error.component';
 import {HomeComponent} from './components/home/home.component';
+import { PostComponent } from './components/post/post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import {HomeComponent} from './components/home/home.component';
     HomeComponent,
     SubmitPostComponent,
     PostsListComponent,
-    ErrorComponent
+    ErrorComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

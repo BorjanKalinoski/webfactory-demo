@@ -1,0 +1,23 @@
+.post-container {
+  width: 100%;
+  margin: 2% 0;
+  border-radius: 5px;
+  padding: 2% 0;
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  text-overflow: ellipsis;
+}
+.post-container * {
+  margin: 0;
+  padding-left: 2%;
+  word-break: break-word;
+}
+.post-container h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-container h4{
+
+}
