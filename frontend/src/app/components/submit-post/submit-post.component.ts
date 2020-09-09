@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   templateUrl: './submit-post.component.html',
   styleUrls: ['./submit-post.component.css']
 })
-export class SubmitPostComponent implements OnInit, OnDestroy {
+export class SubmitPostComponent implements OnDestroy {
 
   loading = false;
   failed = false;
@@ -22,9 +22,12 @@ export class SubmitPostComponent implements OnInit, OnDestroy {
     description: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private postService: PostService, private userService: UserService, private router: Router) {}
+  constructor(
+    private postService: PostService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
 
   async submitHandler() {
     this.loading = true;

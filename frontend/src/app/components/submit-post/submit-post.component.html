@@ -8,17 +8,15 @@
       <textarea  rows="4" matInput formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="description.invalid && description.touched">Description is not valid</mat-error>
     </mat-form-field>
-
     <div [className]="'button-container'">
       <button   mat-raised-button type="submit" [disabled]="!form.valid">
         <span *ngIf="!loading">Submit</span>
         <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
       </button>
     </div>
-    <div *ngIf="failed" [className]="'alert-danger'">
-      {{errorMessage ? errorMessage :"Unexpected error"}}
-    </div>
   </div>
+  <app-error *ngIf="failed" [error]="errorMessage"></app-error>
+
 </form>
 
 

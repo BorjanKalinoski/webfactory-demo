@@ -33,10 +33,7 @@
         >Password is not valid</mat-error
       >
     </mat-form-field>
-    <div *ngIf="failed" [className]="'alert-danger'">
-      {{ errorMessage ? errorMessage : "Unexpected error" }}
-    </div>
-
+    <app-error *ngIf="failed"  [error]="errorMessage" ></app-error>
     <div [className]="'button-container'">
       <button
         [ngClass]="loading ? 'loading' : ''"

@@ -9,26 +9,25 @@ import {Subscription} from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
 
   loading = false;
   failed = false;
-  errorMessage = '';
   subscriptions: Subscription = new Subscription();
+  error;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private userService: UserService, private router: Router) {
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
 
-  ngOnInit(): void {
-  }
-
-  async submitHandler() {
+  submitHandler() {
     this.loading = true;
     this.failed = false;
 
@@ -41,8 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/']);
       }, ({error}) => {
         this.failed = true;
-        this.errorMessage = error.error;
         this.loading = false;
+        this.error = error.error;
       })
     );
   }

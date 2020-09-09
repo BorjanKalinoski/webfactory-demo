@@ -14,8 +14,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   private subscriptions: Subscription = new Subscription();
   failed = false;
-  error;
-  totalRecords;
+  error: any;
+  totalRecords: number | string;
   page = 1;
 
 

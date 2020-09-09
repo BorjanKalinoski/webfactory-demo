@@ -11,15 +11,19 @@ import {Post} from '../../models/Post';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private router: Router, private userService: UserService, private postService: PostService) {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private postService: PostService) {
   }
 
   ngOnInit(): void {
-    // if (!this.userService.user) {
-    //   this.router.navigate(['/login']);
-    // }
+    if (!this.userService.user) {
+      this.router.navigate(['/login']);
+    }
   }
 
   isLoggedIn() {

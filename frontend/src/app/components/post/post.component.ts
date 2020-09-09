@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {UserService} from '../../services/user.service';
 import {PostService} from '../../services/post.service';
@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnDestroy{
   @Input() id;
   @Input() title;
   @Input() description;
@@ -17,13 +17,10 @@ export class PostComponent implements OnInit {
   @Input() userId;
   private subscriptions: Subscription = new Subscription();
 
-
-  constructor(private userService: UserService, private postService: PostService) {
-
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(
+    private userService: UserService,
+    private postService: PostService
+  ) { }
 
   getFormat(date) {
     return moment(date).format('DD-MM-YYYY hh:mm A');
@@ -42,5 +39,9 @@ export class PostComponent implements OnInit {
         this.postService.deletePostSubject.next(data);
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

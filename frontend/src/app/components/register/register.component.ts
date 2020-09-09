@@ -10,25 +10,24 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements  OnDestroy {
+
+  loading = false;
+  failed = false;
+  errorMessage = '';
+  subscriptions: Subscription = new Subscription();
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     fullName: new FormControl('', Validators.required)
   });
-  loading = false;
-  failed = false;
-  errorMessage = '';
-  subscriptions: Subscription = new Subscription();
 
   constructor(
     private userService: UserService,
     private router: Router
   ) {}
 
-
-  ngOnInit(): void {
-  }
 
   submitHandler() {
     this.loading = true;

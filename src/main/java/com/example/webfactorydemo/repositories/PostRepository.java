@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
-    Page<Post> findAllByUserIdOrderByCreatedAtDesc(Long user_id, Pageable pageable);
     Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<Post> findAllByUserIdOrderByCreatedAtDesc(Long user_id, Pageable pageable);
 }

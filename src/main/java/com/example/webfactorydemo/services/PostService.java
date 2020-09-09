@@ -28,6 +28,7 @@ public class PostService {
 
     public List<GetPost> getPosts(Pageable pageable) {//TODO pageable
         Page<Post> posts = postRepository.findAllByOrderByCreatedAtDesc(pageable);
+
         List<GetPost> getPosts = new ArrayList<>();
 
         posts.forEach(post -> {
