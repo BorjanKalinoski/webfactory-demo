@@ -10,6 +10,7 @@ import {MatFormField} from '@angular/material/form-field';
 import {MatRippleModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
@@ -38,7 +39,8 @@ import { PostComponent } from './components/post/post.component';
     MatInputModule,
     MatRippleModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -48,7 +50,8 @@ import { PostComponent } from './components/post/post.component';
     MatRippleModule,
     MatButtonModule,
     MatFormField,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonToggleModule
   ]
 })
 export class AppModule {}

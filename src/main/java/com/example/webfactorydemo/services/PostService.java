@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,7 +75,7 @@ public class PostService {
         if (u.isEmpty()) {
             throw new UserNotFoundException(ErrorKey.UserNotFound);
         }
-        List<Post> posts = postRepository.findAllByUserId(uId, pageable).toList();
+        Page<Post> posts = postRepository.findAllByUserIdOrderByCreatedAtDesc(uId, pageable);
         List<GetPost> getPosts = new ArrayList<>();
         posts.forEach(post -> {
             getPosts.add(new GetPost(post.getId(), post.getTitle(), post.getDescription(), post.getCreatedAt(), post.getUser().getId()));

@@ -12,6 +12,7 @@ export class PostService {
   posts: Post[];
   newPostSubject: Subject<Post> = new Subject<Post>();
   deletePostSubject: Subject<Post> = new Subject<Post>();
+  getPostsSubject: Subject<Post[]> = new Subject<Post[]>();
 
   constructor(private http: HttpClient) {}
 

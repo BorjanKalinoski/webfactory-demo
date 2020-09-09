@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
 })
 export class PostsListComponent implements OnInit, OnDestroy {
 
-  posts: Post[];
+  posts: Post[] = [];
   private subscriptions: Subscription = new Subscription();
   failed = false;
   error;
@@ -22,8 +22,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(
       this.postService.getPosts().subscribe(posts => {
-        console.log('poists!');
-        console.log(posts);
         this.posts = posts;
       }, (err) => {
         this.failed = true;
@@ -44,11 +42,15 @@ export class PostsListComponent implements OnInit, OnDestroy {
         this.posts = this.posts.filter(post => post.id !== data.id);
       })
     );
+
+    this.subscriptions.add(
+      this.postService.getPostsSubject.subscribe(posts => {
+        this.posts = posts;
+      })
+    );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
-
 }
