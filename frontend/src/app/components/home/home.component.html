@@ -13,6 +13,5 @@
       <mat-button-toggle (click)="getPosts()" value="all">All posts</mat-button-toggle>
       <mat-button-toggle *ngIf="isLoggedIn()" (click)="getPostsByUserId()" value="mine">My posts</mat-button-toggle>
     </mat-button-toggle-group>
-
   <app-posts-list></app-posts-list>
 </div>

@@ -15,6 +15,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   failed = false;
   error;
+  totalRecords;
+  page = 1;
 
 
   constructor(private postService: PostService) {  }

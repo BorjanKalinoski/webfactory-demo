@@ -1,7 +1,16 @@
 <div [className]="'posts-container'">
   <div *ngIf="posts.length===0">There are no posts to show..</div>
-  <div *ngFor="let post of posts">
+  <div *ngFor="let post of posts | paginate: {
+  id:'pagination',
+  itemsPerPage:10,
+  currentPage: page,
+  totalItems: totalRecords
+
+  }">
     <app-post [id]="post.id" [title]="post.title" [description]="post.description" [createdAt]="post.createdAt" [userId]="post.userId"></app-post>
+  </div>
+  <div>
+    <pagination-controls id="pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
   </div>
   <app-error *ngIf="failed" [error]="error"></app-error>
 </div>

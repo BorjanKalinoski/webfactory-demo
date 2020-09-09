@@ -19,6 +19,8 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
 import { ErrorComponent } from './components/error/error.component';
 import {HomeComponent} from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { PostComponent } from './components/post/post.component';
     MatRippleModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

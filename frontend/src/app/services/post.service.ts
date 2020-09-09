@@ -9,7 +9,6 @@ import {Observable, Subject} from 'rxjs';
 })
 export class PostService {
 
-  posts: Post[];
   newPostSubject: Subject<Post> = new Subject<Post>();
   deletePostSubject: Subject<Post> = new Subject<Post>();
   getPostsSubject: Subject<Post[]> = new Subject<Post[]>();
@@ -22,7 +21,7 @@ export class PostService {
   }
 
   getPostsByUserId(userId: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${environment.apiUrl}/posts/user/${userId}`);
+    return this.http.get<Post[]>(`${environment.apiUrl}/posts/user/${userId}?page=0&size=10`);
   }
 
   getPostById(id: string): Observable<Post> {
